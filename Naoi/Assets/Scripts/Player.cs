@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public Transform myCameraHead;
     float mouseSensitivity = 700f;
     float cameraVerticalRotation;
+    public GameObject bullet;
+    public Transform firePosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,8 @@ public class Player : MonoBehaviour
     {
         Movement();
         CamRotation();
+
+        Firing();
     }
 
     //method controls the movement
@@ -47,4 +52,13 @@ public class Player : MonoBehaviour
         myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation,0f,0f);
     }
 
+    void Firing()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet,firePosition.position,firePosition.rotation);
+        }
+    }
+
+    
 }
