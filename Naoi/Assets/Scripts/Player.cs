@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public CharacterController playerController;
     public float speed = 3f;
     public Transform myCameraHead;
-    float mouseSensitivity = 500f;
+    float mouseSensitivity = 700f;
     float cameraVerticalRotation;
     // Start is called before the first frame update
     void Start()
@@ -33,12 +33,15 @@ public class Player : MonoBehaviour
         movement = movement * speed *Time.deltaTime;
         playerController.Move(movement);
     }
+
+    //camera functions
     void CamRotation()
     {
         float mouseX = Input.GetAxisRaw("Mouse X")*mouseSensitivity*Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y")*mouseSensitivity*Time.deltaTime;
 
         cameraVerticalRotation -=mouseY;    
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation,-90f, 90f);
 
         transform.Rotate(Vector3.up *mouseX);
         myCameraHead.localRotation = Quaternion.Euler(cameraVerticalRotation,0f,0f);
